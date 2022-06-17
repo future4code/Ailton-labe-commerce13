@@ -7,6 +7,7 @@ justify-content:space-between;
 flex-direction: row;
 gap: 10px;
 width: 100%;
+height: 100%;
 min-height:100vh;
 padding: 30px;
 `
@@ -170,7 +171,8 @@ class Carrinho extends React.Component{
   render(){
     const renderizaProduto = this.props.carrinho.map((dados)=>{
       return (
-        <CarrinhoItem>  
+        <CarrinhoItem> 
+          <p>{dados.id.length}</p>
           <p>{dados.name}</p>
           <button onClick={() => this.props.removeProduto(dados.id)}>Remover</button>
 
@@ -206,7 +208,8 @@ class App extends React.Component{
         imageUrl: "https://picsum.photos/id/239/200/300",
     },
   ],
-    carrinho:[]
+    carrinho:[],
+    quantidade:[],
   }
 
   adicionarProduto = (id) =>{
@@ -216,9 +219,15 @@ class App extends React.Component{
     const copiaCarrinho =[...this.state.carrinho]
     copiaCarrinho.push(filterproduto[0])
     this.setState({carrinho:copiaCarrinho})
-    
-    
+
+    // const filtercarrinho = this.state.carrinho.filter((dados)=>{
+    //   return dados.id === id 
+    // })
+    // const carrinhoQuantidade = filtercarrinho.length + 1
+    // this.setState({quantidade:carrinhoQuantidade})
+    // console.log(quantidade)
   }
+  
   removeProduto = (id)=>{
   //   const filtercarrinho = 
   //   this.setState({carrinho:this.state.carrinho.filter((dados)=>{   //carrinho estava com dois 'n'
@@ -229,9 +238,9 @@ class App extends React.Component{
   render(){
   return (
     <PaginaInicial>
-      <Filtro lista={this.state.produtos} />
-      <Home produtos={this.state.produtos} addproduto={this.adicionarProduto}/>
-      <Carrinho carrinho={this.state.carrinho} removeProduto={this.removeProduto}/>
+        <Filtro lista={this.state.produtos} />
+        <Home produtos={this.state.produtos} addproduto={this.adicionarProduto} />
+        <Carrinho carrinho={this.state.carrinho} removeProduto={this.removeProduto}/>
     </PaginaInicial>
   );
 }
