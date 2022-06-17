@@ -1,12 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-
-const ContainerFiltros = styled.div `
-border: 1px solid black;
-width: 20%;
-height: 450px;
-padding: 16px;
-`
+import { ContainerFiltros } from "./Filtro.styled";
 
 export default class Filtros extends React.Component {
     render() {
