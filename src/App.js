@@ -103,18 +103,64 @@ class CardHome extends React.Component{
     )
   }
 }
+
 class Filtro extends React.Component{
+  state = {
+    inputValorMinimo: 100,
+    inputValorMaximo: 1000,
+    inputBuscaNome: ""
+  }
+  
+  onChangeValorMinimo = (event) => {
+    this.setState({inputValorMinimo: event.target.value})
+  }
+  
+  onChangeValorMaximo = (event) => {
+    this.setState({inputValorMaximo: event.target.value})
+  }
+    
+  onClickFiltraValor = (lista, minimo, maximo) => {
+    const listaFiltradaValor = lista.filter((item) => {
+      if(item.value >= minimo) {
+        return true
+      }
+    }).filter((item) => {
+      if(item.value <= maximo) {
+        return true
+      }
+    })
+  
+    console.log(listaFiltradaValor)
+    // RETORNO
+  }
+  
+  onChangeBuscaNome = (event) => {
+    this.setState({inputBuscaNome: event.target.value})
+  }
+
+  onClickBuscaNome = (props) => {
+    const listaFiltradaNome = this.props.lista.filter((item) => {
+      if(item.name.toLowerCase().includes(this.state.inputBuscaNome.toLowerCase())) {
+        return true
+      }
+    })
+    console.log(listaFiltradaNome)
+    // RETORNO
+  }
+  
   render(){
     return(
     <FiltroInicil>
       <h3>Filtros</h3>
       <div>
-      <p>Valor mínimo:</p>
-      <input placeholder="não é imput"></input>
-      <p>Valor máximo:</p>
-      <input placeholder="não é imput"></input>
-      <p>Busca por nome:</p>
-      <input placeholder="esse é "></input>
+        <p>Valor mínimo:</p>
+        <input type="number" onChange={this.onChangeValorMinimo} value={this.state.inputValorMinimo} />
+        <p>Valor máximo:</p>
+        <input type="number" onChange={this.onChangeValorMaximo} value={this.state.inputValorMaximo} />
+        <button onClick={() => this.onClickFiltraValor(this.props.lista, this.state.inputValorMinimo, this.state.inputValorMaximo)}>Filtrar</button>
+        <p>Busca por nome:</p>
+        <input type="text" onChange={this.onChangeBuscaNome}/>
+        <button onClick={this.onClickBuscaNome}>Pesquisar</button>
       </div>
     </FiltroInicil>
     )
@@ -124,7 +170,7 @@ class Carrinho extends React.Component{
   render(){
     const renderizaProduto = this.props.carrinho.map((dados)=>{
       return (
-        <CarrinhoItem>
+        <CarrinhoItem>  
           <p>{dados.name}</p>
           <button onClick={() => this.props.removeProduto(dados.id)}>Remover</button>
 
@@ -150,18 +196,19 @@ class App extends React.Component{
     {
       id: 2,
         name: "Produto 2",
-        value: 100,
+        value: 80,
         imageUrl: "https://picsum.photos/id/239/200/300",
     },
     {
       id: 3,
         name: "Produto 3",
-        value: 100,
+        value: 200,
         imageUrl: "https://picsum.photos/id/239/200/300",
     },
   ],
     carrinho:[]
   }
+
   adicionarProduto = (id) =>{
     const filterproduto = this.state.produtos.filter((dados)=>{
       return dados.id===id
@@ -174,7 +221,7 @@ class App extends React.Component{
   }
   removeProduto = (id)=>{
   //   const filtercarrinho = 
-  //   this.setState({carrinho:this.state.carrinnho.filter((dados)=>{
+  //   this.setState({carrinho:this.state.carrinho.filter((dados)=>{   //carrinho estava com dois 'n'
   //     return dados.id!==id });
   // });
   console.log("removeu")
@@ -182,7 +229,7 @@ class App extends React.Component{
   render(){
   return (
     <PaginaInicial>
-      <Filtro/>
+      <Filtro lista={this.state.produtos} />
       <Home produtos={this.state.produtos} addproduto={this.adicionarProduto}/>
       <Carrinho carrinho={this.state.carrinho} removeProduto={this.removeProduto}/>
     </PaginaInicial>
