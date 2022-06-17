@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import Filtros from "./components/Filtros";
 
 const PaginaInicial = styled.div `
 display:flex;
@@ -11,6 +12,16 @@ height: 100%;
 min-height:100vh;
 padding: 30px;
 `
+const ContainerHome = styled.div`
+display:flex;
+justify-content:space-between;
+gap: 10px;
+width: 100%;
+height: 100%;
+min-height:100vh;
+/* padding: 30px; */
+`
+
 const HeaderHome = styled.div `
 display:flex;
 justify-content: space-between;
@@ -63,13 +74,30 @@ margin: 2px 0px;
 padding: 0px 10px;
 background-color: red;
 `
-const FiltroInicil = styled.div `
-border: 1px solid black;
-width: 20%;
-height: 450px;
+// const ContainerFiltros = styled.div `
+// border: 1px solid black;
+// width: 20%;
+// height: 450px;
+// padding: 16px;
+// `
 
-`
 class Home extends React.Component{
+  state = {
+    // inputValorMinimo: 0,
+    // inputValorMaximo: 1000,
+    // inputBuscaNome: ""
+  }
+
+  // onChangeValorMinimo = (event) => {
+  //   this.setState({inputValorMinimo: event.target.value})
+  // }
+  // onChangeValorMaximo = (event) => {
+  //   this.setState({inputValorMaximo: event.target.value})
+  // }
+  // onChangeBuscaNome = (event) => {
+  //   this.setState({inputBuscaNome: event.target.value})
+  // }
+
   render(){
     return (
     <div>
@@ -81,14 +109,26 @@ class Home extends React.Component{
           <option>Decrescente</option>
         </select>
       </HeaderHome>
-        <CardHome produtos={this.props.produtos} addproduto={this.props.addproduto}/> 
+      <CardHome
+        produtos={this.props.produtos}
+        addproduto={this.props.addproduto}
+        minimo={this.props.minimo}
+        maximo={this.props.maximo}
+        busca={this.props.busca}
+      />
     </div>
     )
   };
 };
 class CardHome extends React.Component{
   render(){
-    const listaProdutos = this.props.produtos.map((dados)=>{
+    const listaProdutos = this.props.produtos.filter((item) => {
+      return item.value >= this.props.minimo
+    }).filter((item) => {
+      return item.value <= this.props.maximo
+    }).filter((item) => {
+      return item.name.toLowerCase().includes(this.props.busca.toLowerCase())
+    }).map((dados)=>{
       return (
       <Card>
         <img src={dados.imageUrl} alt="imagem do: {dados.name}"/>
@@ -105,68 +145,6 @@ class CardHome extends React.Component{
   }
 }
 
-class Filtro extends React.Component{
-  state = {
-    inputValorMinimo: 100,
-    inputValorMaximo: 1000,
-    inputBuscaNome: ""
-  }
-  
-  onChangeValorMinimo = (event) => {
-    this.setState({inputValorMinimo: event.target.value})
-  }
-  
-  onChangeValorMaximo = (event) => {
-    this.setState({inputValorMaximo: event.target.value})
-  }
-    
-  onClickFiltraValor = (lista, minimo, maximo) => {
-    const listaFiltradaValor = lista.filter((item) => {
-      if(item.value >= minimo) {
-        return true
-      }
-    }).filter((item) => {
-      if(item.value <= maximo) {
-        return true
-      }
-    })
-  
-    console.log(listaFiltradaValor)
-    // RETORNO
-  }
-  
-  onChangeBuscaNome = (event) => {
-    this.setState({inputBuscaNome: event.target.value})
-  }
-
-  onClickBuscaNome = (props) => {
-    const listaFiltradaNome = this.props.lista.filter((item) => {
-      if(item.name.toLowerCase().includes(this.state.inputBuscaNome.toLowerCase())) {
-        return true
-      }
-    })
-    console.log(listaFiltradaNome)
-    // RETORNO
-  }
-  
-  render(){
-    return(
-    <FiltroInicil>
-      <h3>Filtros</h3>
-      <div>
-        <p>Valor mínimo:</p>
-        <input type="number" onChange={this.onChangeValorMinimo} value={this.state.inputValorMinimo} />
-        <p>Valor máximo:</p>
-        <input type="number" onChange={this.onChangeValorMaximo} value={this.state.inputValorMaximo} />
-        <button onClick={() => this.onClickFiltraValor(this.props.lista, this.state.inputValorMinimo, this.state.inputValorMaximo)}>Filtrar</button>
-        <p>Busca por nome:</p>
-        <input type="text" onChange={this.onChangeBuscaNome}/>
-        <button onClick={this.onClickBuscaNome}>Pesquisar</button>
-      </div>
-    </FiltroInicil>
-    )
-  };
-};
 class Carrinho extends React.Component{
   render(){
     const renderizaProduto = this.props.carrinho.map((dados)=>{
@@ -210,6 +188,9 @@ class App extends React.Component{
   ],
     carrinho:[],
     quantidade:[],
+    inputValorMinimo: 0,
+    inputValorMaximo: 1000,
+    inputBuscaNome: "",
   }
 
   adicionarProduto = (id) =>{
@@ -235,12 +216,39 @@ class App extends React.Component{
   // });
   console.log("removeu")
   };
+
+
+  onChangeValorMinimo = (event) => {
+    this.setState({inputValorMinimo: event.target.value})
+  }
+  onChangeValorMaximo = (event) => {
+    this.setState({inputValorMaximo: event.target.value})
+  }
+  onChangeBuscaNome = (event) => {
+    this.setState({inputBuscaNome: event.target.value})
+  }
+
   render(){
   return (
     <PaginaInicial>
-        <Filtro lista={this.state.produtos} />
-        <Home produtos={this.state.produtos} addproduto={this.adicionarProduto} />
-        <Carrinho carrinho={this.state.carrinho} removeProduto={this.removeProduto}/>
+      <Filtros
+        onChangeValorMinimo={this.onChangeValorMinimo}
+        valorMinimo={this.state.inputValorMinimo}
+        onChangeValorMaximo={this.onChangeValorMaximo}
+        valorMaximo={this.state.inputValorMaximo}
+        onChangeBuscaNome={this.onChangeBuscaNome}
+      />
+        <Home
+          produtos={this.state.produtos}
+          addproduto={this.adicionarProduto}
+          minimo={this.state.inputValorMinimo}
+          maximo={this.state.inputValorMaximo}
+          busca={this.state.inputBuscaNome}
+        />
+        <Carrinho
+          carrinho={this.state.carrinho}
+          removeProduto={this.removeProduto}
+          busca={this.state.inputBuscaNome}/>
     </PaginaInicial>
   );
 }
