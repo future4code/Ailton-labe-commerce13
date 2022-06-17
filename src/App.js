@@ -224,7 +224,7 @@ class App extends React.Component{
   //   this.setState({carrinho:this.state.carrinho.filter((dados)=>{   //carrinho estava com dois 'n'
   //     return dados.id!==id });
   // });
-  console.log("removeu")
+  console.log("Removeu")
   };
   render(){
   return (
