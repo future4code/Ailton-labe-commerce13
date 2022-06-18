@@ -16,7 +16,7 @@ export default class CardHome extends React.Component{
           <img src={dados.imageUrl} alt="imagem do: {dados.name}"/>
           <p>{dados.name}</p>
           <p>{dados.value}</p>
-          <button onClick={()=>this.props.addproduto(dados.id)}>Adicionar ao Carrinho</button>
+          <button onClick={()=>this.props.addproduto(dados)}>Adicionar ao Carrinho</button>
         </Card>
       )})
       return(
