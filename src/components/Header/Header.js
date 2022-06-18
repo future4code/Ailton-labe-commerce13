@@ -10,7 +10,7 @@ export default function Header(){
             <img src={IconeLogo} alt='logo astronauta'/>
         </div>
         <div>
-        <a href='/'><h1>Commerce Labetube</h1></a>
+        <a href='/'><h1>Apollo XIII T-Shirts</h1></a>
         </div>
         <div>
             <a href='/'>Cadastre-se</a>
