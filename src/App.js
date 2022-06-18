@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import Header from "./components/Header/Header";
 import Filtros from "./components/Filtros/Filtros";
 import Home from "./components/Home/Home"
 import Carrinho from "./components/Carrinho/Carrinho";
@@ -18,21 +19,51 @@ class App extends React.Component{
   state={
     produtos:[{
       id: 1,
-        name: "Produto 1",
-        value: 100,
-        imageUrl: "https://picsum.photos/id/237/200/300",
+        name: "T-shirt Space Rock",
+        value: 70,
+        imageUrl: "https://static3.tcdn.com.br/img/img_prod/460977/camiseta_feminina_unissex_space_nasa_guitar_music_astronauts_colors_astronauta_preta_ev_81177_1_8c537e231433d5921715ea616c62ef51.jpg",
     },
     {
       id: 2,
-        name: "Produto 2",
-        value: 80,
-        imageUrl: "https://picsum.photos/id/239/200/300",
+        name: "T-shirt Astronaut",
+        value: 75,
+        imageUrl: "https://static3.tcdn.com.br/img/img_prod/460977/camiseta_feminina_unissex_astronauts_space_nasa_astronauta_preta_ev_81157_1_8f128dbf001b3a171ebcf696a0490907.jpg",
     },
     {
       id: 3,
-        name: "Produto 3",
-        value: 200,
-        imageUrl: "https://picsum.photos/id/239/200/300",
+        name: "T-shirt Love Space",
+        value: 54,
+        imageUrl: "https://static3.tcdn.com.br/img/img_prod/460977/camiseta_feminina_unissex_cosmic_love_astronauts_amor_cosmico_astronauta_space_nasa_preta_ev_89213_1_851271882247a16e0fcf50a6f0536588.jpg",
+    },
+    {
+      id: 4,
+        name: "T-shirt Alone",
+        value: 65,
+        imageUrl: "https://static3.tcdn.com.br/img/img_prod/460977/camiseta_feminina_unissex_astronaut_swing_moon_space_nasa_astronauta_balanco_na_lua_espaco_preta_ev_79627_1_016cbaa180a1ff84f2dd3e20c53f9e92.jpg",
+    },
+    {
+      id: 5,
+        name: "T-shirt Abduction ",
+        value: 57,
+        imageUrl: "https://img.lojasrenner.com.br/item/549031453/zoom/5.jpg",
+    },
+    {
+      id: 6,
+        name: "T-shirt Astronaut Art ",
+        value: 90,
+        imageUrl: "https://cea.vtexassets.com/arquivos/ids/28363912-1600-auto?v=637484960759470000&width=1600&height=auto&aspect=true",
+    },
+    {
+      id: 7,
+        name: "T-shirt IDK",
+        value: 73,
+        imageUrl: "https://img.lojasrenner.com.br/item/558567292/zoom/10.jpg",
+    },
+    {
+      id: 8,
+        name: "T-shirt Space Engineering",
+        value: 45,
+        imageUrl: "https://img.lojasrenner.com.br/item/559131351/zoom/10.jpg",
     },
   ],
     carrinho:[],
@@ -81,6 +112,7 @@ class App extends React.Component{
   }
 
   render(){
+
     return (
       <PaginaInicial>
         <Filtros
