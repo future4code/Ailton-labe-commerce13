@@ -18,6 +18,7 @@ export default class CardHome extends React.Component{
           <b><p>{dados.name}</p></b>
           <p>{dados.value}</p>
           <button onClick={()=>this.props.addproduto(dados)}>Adicionar ao Carrinho</button>
+          </Card2>
         </Card>
       )})
       return(
