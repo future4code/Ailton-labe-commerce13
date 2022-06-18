@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CardHome from "../CardHome/CardHome";
-import {HeaderHome } from "./Home.styled";
+import {HeaderHome,Ordem } from "./Home.styled";
 
 
 export default class Home extends React.Component{
@@ -24,12 +24,16 @@ export default class Home extends React.Component{
       return (
       <div>
         <HeaderHome>
+          <div>
           <p>Quantidade de produtos:{this.props.produtos.length}</p>
+          </div>
+          <Ordem>
           <label>Ordenação:</label>
           <select>
             <option>Crescente</option>
             <option>Decrescente</option>
           </select>
+          </Ordem>
         </HeaderHome>
         <CardHome
           produtos={this.props.produtos}

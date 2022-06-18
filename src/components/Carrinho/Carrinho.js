@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { CarrinhoInicial,CarrinhoItem} from "./Carrinho.styled";
+import { CarrinhoInicial,CarrinhoItem,HeaderCarrinho} from "./Carrinho.styled";
+import Icone2 from '../Img/icone2.png'
 
 export default class Carrinho extends React.Component{
     render(){
@@ -15,7 +16,10 @@ export default class Carrinho extends React.Component{
       })
       return(
         <CarrinhoInicial>
+        <HeaderCarrinho>
         <h3>Carrinho:</h3>
+        <img src={Icone2}/>
+        </HeaderCarrinho>
         {renderizaProduto}
       </CarrinhoInicial>
       )
