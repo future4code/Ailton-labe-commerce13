@@ -37,18 +37,21 @@ class App extends React.Component{
   ],
     carrinho:[],
     quantidade:[],
+    totalCarrinho: 0,
     inputValorMinimo: 0,
     inputValorMaximo: 1000,
     inputBuscaNome: "",
   }
 
-  adicionarProduto = (id) =>{
+  adicionarProduto = (lista) =>{
     const filterproduto = this.state.produtos.filter((dados)=>{
-      return dados.id===id
+      return dados.id===lista.id
     });
     const copiaCarrinho =[...this.state.carrinho]
     copiaCarrinho.push(filterproduto[0])
     this.setState({carrinho:copiaCarrinho})
+
+    this.setState({totalCarrinho: this.state.totalCarrinho + lista.value})
 
     // const filtercarrinho = this.state.carrinho.filter((dados)=>{
     //   return dados.id === id 
@@ -78,15 +81,15 @@ class App extends React.Component{
   }
 
   render(){
-  return (
-    <PaginaInicial>
-      <Filtros
-        onChangeValorMinimo={this.onChangeValorMinimo}
-        valorMinimo={this.state.inputValorMinimo}
-        onChangeValorMaximo={this.onChangeValorMaximo}
-        valorMaximo={this.state.inputValorMaximo}
-        onChangeBuscaNome={this.onChangeBuscaNome}
-      />
+    return (
+      <PaginaInicial>
+        <Filtros
+          onChangeValorMinimo={this.onChangeValorMinimo}
+          valorMinimo={this.state.inputValorMinimo}
+          onChangeValorMaximo={this.onChangeValorMaximo}
+          valorMaximo={this.state.inputValorMaximo}
+          onChangeBuscaNome={this.onChangeBuscaNome}
+        />
         <Home
           produtos={this.state.produtos}
           addproduto={this.adicionarProduto}
@@ -97,9 +100,11 @@ class App extends React.Component{
         <Carrinho
           carrinho={this.state.carrinho}
           removeProduto={this.removeProduto}
-          busca={this.state.inputBuscaNome}/>
-    </PaginaInicial>
-  );
+          total={this.state.totalCarrinho}
+        />
+      </PaginaInicial>
+    );
+  }
 }
-}
+
 export default App;
