@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 export const Inicio = styled.header `
 background-color: grey;
 display: flex;

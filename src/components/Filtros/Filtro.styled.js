@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 export const ContainerFiltros = styled.div `
 width: 20%;
 height: 450px;
