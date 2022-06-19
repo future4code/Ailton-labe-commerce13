@@ -1,7 +1,6 @@
 import React from "react";
 import { ContainerFiltros,HeaderContainer } from "./Filtro.styled";
 import Icone2 from '../Img/icone3.png'
-
 export default class Filtros extends React.Component {
     render() {
         return(

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 export const HeaderHome = styled.div `
 display:flex;
 justify-content: space-around;
@@ -19,3 +18,9 @@ display: flex;
 justify-content: right;
 align-items: center;
 `
+
+
+
+
+
+

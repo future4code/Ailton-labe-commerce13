@@ -1,9 +1,8 @@
 import styled from "styled-components";
-
 export const CarrinhoInicial = styled.div `
 border: 3px solid black;
 border-radius: 0.5rem;
-width: 20%;
+width: 30%;
 height: 450px;
 padding: 16px;
 overflow: auto;

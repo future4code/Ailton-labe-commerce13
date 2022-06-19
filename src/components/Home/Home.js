@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import CardHome from "../CardHome/CardHome";
 import {HeaderHome,Ordem } from "./Home.styled";
-
-
 export default class Home extends React.Component{
     state = {
       // inputValorMinimo: 0,
       // inputValorMaximo: 1000,
       // inputBuscaNome: ""
     }
-  
     // onChangeValorMinimo = (event) => {
     //   this.setState({inputValorMinimo: event.target.value})
     // }
@@ -19,7 +16,6 @@ export default class Home extends React.Component{
     // onChangeBuscaNome = (event) => {
     //   this.setState({inputBuscaNome: event.target.value})
     // }
-  
     render(){
       return (
       <div>
