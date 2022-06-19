@@ -11,11 +11,11 @@ export default class CardHome extends React.Component{
       }).map((dados)=>{
         return (
         <Card>
-          <img src={dados.imageUrl} alt="imagem do: {dados.name}"/>
+          <img src={dados.imageUrl} alt="imagem do produto"/>
           <Card2>
           <b><p>{dados.name}</p></b>
           <p>{dados.value}</p>
-          <button onClick={()=>this.props.addproduto(dados.id)}>Adicionar ao Carrinho</button>
+          <button onClick={()=>this.props.addproduto(dados)}>Adicionar ao Carrinho</button>
           </Card2>
         </Card>
       )})
