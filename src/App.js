@@ -75,51 +75,76 @@ class App extends React.Component{
   ],
     carrinho:[],
     quantidade:[],
+    totalCarrinho: 0,
     inputValorMinimo: 0,
     inputValorMaximo: 1000,
     inputBuscaNome: "",
   }
-  adicionarProduto = (id) =>{
-   let existe = false;
-   for(let i=0; i<this.state.carrinho.length;i++){
-      if(this.state.carrinho[i].id===id){
-        existe=true
-      }};
-    if(existe===true){
-    const adicionar = this.state.carrinho.map((dados)=>{
-      if(dados.id===id){
-      return {
-        id:dados.id,
-        quantidade:dados.quantidade+1,
-        name:dados.name,
-        value:dados.value,
-        imageUrl:dados.imageUrl
-      }
-      }else{
-      return dados};
-    })
-    this.setState({carrinho:adicionar})
-  }else{
-    const adicionar = this.state.produtos.map((dados)=>{
-      if(dados.id===id){
-      return {
-        id:dados.id,
-        quantidade:1,
-        name:dados.name,
-        value:dados.value,
-        imageUrl:dados.imageUrl
-      }}
-    })
-    const copiaCarrinho=[...this.state.carrinho]
-    copiaCarrinho.push(adicionar[0])
+
+  adicionarProduto = (lista) =>{
+    const filterproduto = this.state.produtos.filter((dados)=>{
+      return dados.id===lista.id
+    });
+    const copiaCarrinho =[...this.state.carrinho]
+    copiaCarrinho.push(filterproduto[0])
     this.setState({carrinho:copiaCarrinho})
+
+    this.setState({totalCarrinho: this.state.totalCarrinho + lista.value})
+
+    // const filtercarrinho = this.state.carrinho.filter((dados)=>{
+    //   return dados.id === id 
+    // })
+    // const carrinhoQuantidade = filtercarrinho.length + 1
+    // this.setState({quantidade:carrinhoQuantidade})
+    // console.log(quantidade)
   }
-  }
+  
+  // adicionarProduto = (id) =>{
+  //  let existe = false;
+  //  for(let i=0; i<this.state.carrinho.length;i++){
+  //     if(this.state.carrinho[i].id===id){
+  //       existe=true
+  //     }};
+  //   if(existe===true){
+  //   const adicionar = this.state.carrinho.map((dados)=>{
+  //     if(dados.id===id){
+  //     return {
+  //       id:dados.id,
+  //       quantidade:dados.quantidade+1,
+  //       name:dados.name,
+  //       value:dados.value,
+  //       imageUrl:dados.imageUrl
+  //     }
+  //     } else{
+  //     return dados};
+  //   })
+  //   this.setState({carrinho:adicionar})
+
+  // }else{
+  //   const adicionar = this.state.produtos.map((dados)=>{
+  //     if(dados.id===id){
+  //     return {
+  //       id:dados.id,
+  //       quantidade:1,
+  //       name:dados.name,
+  //       value:dados.value,
+  //       imageUrl:dados.imageUrl
+  //     }}
+  //   })
+  //   const copiaCarrinho=[...this.state.carrinho]
+  //   copiaCarrinho.push(adicionar[0])
+  //   this.setState({carrinho:copiaCarrinho})
+  // }
+  // }
+
+
   removeProduto = (id)=>{
     const apagarProduto = this.state.carrinho.filter((dados)=>{
+      this.setState({totalCarrinho: this.state.totalCarrinho - dados.value})
       return dados.id !== id
     })
     this.setState({carrinho:apagarProduto})
+    
     console.log("removeu")
   };
    onChangeValorMinimo = (event) => {
@@ -151,10 +176,10 @@ class App extends React.Component{
           busca={this.state.inputBuscaNome}
         />
         <Carrinho
-          addproduto={this.adicionarProduto}
           carrinho={this.state.carrinho}
           removeProduto={this.removeProduto}
-          busca={this.state.inputBuscaNome}/>
+          total={this.state.totalCarrinho}
+        />
     </PaginaInicial>
     </div>
   );

@@ -25,5 +25,5 @@ flex-direction: row;
 justify-content: space-between;
 margin: 2px 0px;
 padding: 0px 10px;
-background-color: red;
+/* background-color: red; */
 `

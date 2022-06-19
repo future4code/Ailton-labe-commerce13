@@ -12,14 +12,14 @@ export default class Carrinho extends React.Component{
           </CarrinhoItem>
         );
       })
-      const valores = this.props.carrinho.map((dados)=>{
-       return dados.value
-      })
-      let valorTotal = 0
-       for (const valor of valores) {
-        valorTotal+=valor
-       }
-      console.log(valorTotal)
+      // const valores = this.props.carrinho.map((dados)=>{
+      //  return dados.value
+      // })
+      // let valorTotal = 0
+      //  for (const valor of valores) {
+      //   valorTotal+=valor
+      //  }
+      // console.log(valorTotal)
       return(
         <CarrinhoInicial>
         <HeaderCarrinho>
@@ -27,7 +27,7 @@ export default class Carrinho extends React.Component{
         <img src={Icone2}/>
         </HeaderCarrinho>
         {renderizaProduto}
-        <p>Valor total = {valorTotal}</p>
+        <p>Valor total = R${this.props.total}</p>
       </CarrinhoInicial>
       )
     };
