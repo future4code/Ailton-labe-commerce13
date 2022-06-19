@@ -11,6 +11,9 @@ display: inline;
 img{
 width: 50px;
 }
+input{
+    max-width: 100%;
+}
 `
 export const HeaderContainer = styled.div`
 display: flex;

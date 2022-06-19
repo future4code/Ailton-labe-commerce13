@@ -140,9 +140,11 @@ class App extends React.Component{
 
   removeProduto = (id)=>{
     const apagarProduto = this.state.carrinho.filter((dados)=>{
+      this.setState({totalCarrinho: this.state.totalCarrinho - dados.value})
       return dados.id !== id
     })
     this.setState({carrinho:apagarProduto})
+    
     console.log("removeu")
   };
    onChangeValorMinimo = (event) => {
